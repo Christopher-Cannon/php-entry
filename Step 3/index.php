@@ -24,6 +24,35 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 	} else {
 		$comment = test_input($_POST["comment"]);
 	}
+
+	// If no errors are present, insert information into database
+	if($form_error == "") {
+		// Database credentials
+		$db_server = "localhost";
+		$db_user = "root";
+		$db_pass = "";
+		$db_name = "php_entry";
+		// Get current date time (UTC)
+		date_default_timezone_set('UTC');
+		$datetime = date('d/m/y(D) H:i:s');
+
+		// Connect to database
+		$conn = new mysqli($db_server, $db_user, $db_pass, $db_name);
+
+		// Check connection
+		if ($conn->connect_error) {
+			die("Connection failed: " . $conn->connect_error);
+		}
+
+		// Insert name, comment and date/time
+		$stmt = $conn->prepare("INSERT INTO comments (comment_name, comment_body, comment_time) VALUES (?, ?, ?)");
+		$stmt->bind_param("sss", $name, $comment, $datetime);
+		$stmt->execute();
+		$stmt->close();
+
+		// Close the connection
+		$conn->close();
+	}
 }
 ?>
 

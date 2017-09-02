@@ -1,0 +1,6 @@
+CREATE TABLE comments (
+id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+comment_name VARCHAR(64) NOT NULL,
+comment_body VARCHAR(512) NOT NULL,
+comment_time VARCHAR(24) NOT NULL
+)

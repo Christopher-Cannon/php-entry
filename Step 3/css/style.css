@@ -1,0 +1,45 @@
+/* Set everything to use border-box model */
+html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  height:100%;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+.main-wrapper {
+  font-family:'Arial', sans-serif;
+  margin:auto;
+  width:90%;
+}
+
+.form-wrapper {
+  border:1px solid #bbb;
+  margin:2em auto;
+  padding:2em;
+  width:100%;
+}
+
+.form-wrapper label, .form-wrapper input, .form-wrapper textarea {
+  font-size:1.2em;
+}
+
+.form-wrapper input, .form-wrapper textarea {
+  margin:0.5em auto 1em;
+  padding:0.5em;
+  width:100%;
+}
+
+.form-wrapper textarea {
+  font-family:'Arial', sans-serif;
+}
+
+.comment-wrapper {
+  border-left:5px solid #f26;
+  padding-left:10px;
+}
