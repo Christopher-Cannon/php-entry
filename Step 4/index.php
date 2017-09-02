@@ -56,7 +56,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 		// Close the connection
 		$conn->close();
 
-		// Refresh the page
 		header('Location: http://localhost/db_entry/index.php');
 	}
 }
@@ -94,7 +93,36 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 			</div>
 
 			<div class="comment-list">
+				<!-- Get and display comments from database -->
+				<?php
+				// Database credentials
+				$db_server = "localhost";
+				$db_user = "root";
+				$db_pass = "";
+				$db_name = "php_entry";
 
+				// Connect to database
+				$conn = new mysqli($db_server, $db_user, $db_pass, $db_name);
+
+				// Check connection
+				if ($conn->connect_error) {
+					die("Connection failed: " . $conn->connect_error);
+				}
+
+				// Query database for matching username and password
+				$sql = "SELECT comment_name, comment_body, comment_time FROM comments ORDER BY id DESC";
+				$result = $conn->query($sql);
+
+				// Attempt to get results from returned array
+				if($result) {
+					while($row = $result->fetch_assoc()) {
+						include "includes/comment.php";
+					}
+				}
+
+				// Close the connection
+				$conn->close();
+				?>
 			</div>
 		</div>
 	</body>
